@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- DIFF DRIVE CONTROLLER -->
+  <gazebo>
+    <plugin name="wheel_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <!-- Wheel joints -->
+      <num_wheel_pairs>3</num_wheel_pairs>
+      <left_joint>left_front_wheel_joint</left_joint>
+      <left_joint>left_mid_wheel_joint</left_joint>
+      <left_joint>left_rear_wheel_joint</left_joint>
+      <right_joint>right_front_wheel_joint</right_joint>
+      <right_joint>right_mid_wheel_joint</right_joint>
+      <right_joint>right_rear_wheel_joint</right_joint>
+
+      <!-- Kinematics -->
+      <wheel_separation>0.64</wheel_separation>
+      <wheel_diameter>0.12</wheel_diameter>
+
+      <!-- Dynamics -->
+      <max_wheel_torque>200.0</max_wheel_torque>
+      <max_wheel_acceleration>10.0</max_wheel_acceleration>
+
+      <!-- Frames -->
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+
+      <!-- ROS integration -->
+      <ros>
+        <namespace>/</namespace>
+        <!-- <use_sim_time>true</use_sim_time> -->
+        <argument>use_sim_time:=true</argument>
+        <argument>/cmd_vel:=cmd_vel</argument>
+        <argument>/odom:=odom</argument>
+      </ros>
+
+      <!-- Odometry and TF -->
+      <publish_odom>true</publish_odom>
+      <!-- <publish_odom_tf>true</publish_odom_tf> -->
+      <!-- <publish_delay>0.05</publish_delay> -->
+      <update_rate>100.0</update_rate> <!-- Keep same as LiDAR rate -->
+    </plugin>
+  </gazebo>
+
+    <!-- Add friction to all wheels -->
+    <gazebo reference="left_front_wheel_link">
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+    </gazebo>
+    <gazebo reference="left_mid_wheel_link">
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+    </gazebo>
+    <gazebo reference="left_rear_wheel_link">
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+    </gazebo>
+    <gazebo reference="right_front_wheel_link">
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+    </gazebo>
+    <gazebo reference="right_mid_wheel_link">
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+    </gazebo>
+    <gazebo reference="right_rear_wheel_link">
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+    </gazebo>
+
+</robot>

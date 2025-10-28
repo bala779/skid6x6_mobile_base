@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<robot name="skid6x6" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="common_properties.xacro"/>
+  <xacro:include filename="wheel_macro.xacro"/>
+  <xacro:include filename="sensor_plugins.xacro"/>
+  <xacro:include filename="controller_plugins.xacro"/>
+
+  <!-- ========================================================= -->
+  <!--                         BASE LINK                         -->
+  <!-- ========================================================= -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.8 0.6 0.3"/>
+      </geometry>
+      <origin xyz="0 0 0.15"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.8 0.6 0.3"/>
+      </geometry>
+      <origin xyz="0 0 0.15"/>
+    </collision>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0 0 0.15"/>
+      <inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.3" iyz="0.0" izz="0.4"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <!-- ========================================================= -->
+  <!--                    WHEELS (USING MACRO)                   -->
+  <!-- ========================================================= -->
+  <!-- Left side -->
+  <xacro:wheel name="left_front_wheel" parent="base_link" x="0.3" y="0.32" z="0.06"/>
+  <xacro:wheel name="left_mid_wheel"   parent="base_link" x="0.0" y="0.32" z="0.06"/>
+  <xacro:wheel name="left_rear_wheel"  parent="base_link" x="-0.3" y="0.32" z="0.06"/>
+
+  <!-- Right side -->
+  <xacro:wheel name="right_front_wheel" parent="base_link" x="0.3" y="-0.32" z="0.06"/>
+  <xacro:wheel name="right_mid_wheel"   parent="base_link" x="0.0" y="-0.32" z="0.06"/>
+  <xacro:wheel name="right_rear_wheel"  parent="base_link" x="-0.3" y="-0.32" z="0.06"/>
+
+  <!-- ========================================================= -->
+  <!--                      FRONT LiDAR                          -->
+  <!-- ========================================================= -->
+  <link name="lidar_front_link">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0.025"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0.025"/>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+ 
+  <joint name="lidar_front_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_front_link"/>
+    <origin rpy="0 0 0" xyz="0.35 0 0.3"/>
+  </joint>
+
+  <gazebo reference="lidar_front_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <link name="lidar_front_frame" />  
+  <joint name="lidar_front_frame_joint" type="fixed">
+    <parent link="lidar_front_link"/>
+    <child link="lidar_front_frame"/>
+    <origin rpy="0 0 0" xyz="0.05 0 0.05"/>
+  </joint>
+
+  <!-- ========================================================= -->
+  <!--                      REAR LiDAR                           -->
+  <!-- ========================================================= -->
+  <link name="lidar_rear_link">
+    <visual>
+      <geometry>
+        <box size="0.1 0.4 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0.025"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0.025"/>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="lidar_rear_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_rear_link"/>
+    <origin rpy="0 0 3.14" xyz="-0.35 0 0.3"/>
+  </joint>
+
+  <gazebo reference="lidar_rear_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <link name="lidar_rear_frame"/>
+  <joint name="lidar_rear_frame_joint" type="fixed">
+    <parent link="lidar_rear_link"/>
+    <child link="lidar_rear_frame"/>
+    <origin rpy="0 0 0" xyz="0.05 0 0.05"/>
+  </joint>
+
+</robot>
+
