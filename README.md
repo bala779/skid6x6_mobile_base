@@ -15,9 +15,12 @@ The system integrates:
 ## 🧩 Repository Structure
 
 edge_force_ws/
-└── src
-├── skid6x6_description/
-└── skid6x6_navigation/
+
+    - src
+    
+    - skid6x6_description/
+    
+    - skid6x6_navigation/
 
 ## 📦 Packages Description
 
@@ -34,17 +37,17 @@ This package contains the **robot’s physical and visual description**, Gazebo 
 ### 2️⃣ skid6x6_navigation
 This package provides **localization, mapping, and navigation** functionality using Nav2 and SLAM Toolbox.
 
----
-#### ⚙️ Key Features
+## ⚙️ Key Features
 - SLAM Toolbox integration for real-time mapping  
 - EKF-based odometry
 - Preconfigured RViz setup for visualization  
 - Map saving and loading utilities
 - Navigation2 (Nav2) stack for autonomous path planning  - In Progress
+  
 
-🚀 Build & Run Instructions
+## 🚀 Build & Run Instructions
 
-1️⃣ Build the Workspace
+**1️⃣ Build the Workspace**
 
 This project uses two additional packages for 3D mapping and scan merging:
 
@@ -52,17 +55,21 @@ lidarslam_ros2 – for LiDAR-based 3D SLAM and mapping.
 
 scan merger    – for merging multiple LiDAR scans into a single point cloud.
 
-🧩 Steps to Build: 
+## 🧩 Steps to Build: 
 
-# Clone the repositories
-git clone https://github.com/rsasaki0109/lidarslam_ros2.git
-git clone https://github.com/LCAS/scans_merger.git
+  - #### Clone the repositories
 
-# Build the workspace
-colcon build
+      - git clone https://github.com/rsasaki0109/lidarslam_ros2.git
 
-# Source the setup file
-source install/setup.bash
+      - git clone https://github.com/LCAS/scans_merger.git
+
+  - #### Build the workspace
+
+      - colcon build
+
+  - #### Source the setup file
+
+      - source install/setup.bash
 
 
 2️⃣ **Launch simulation**
