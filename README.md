@@ -43,10 +43,27 @@ This package provides **localization, mapping, and navigation** functionality us
 - Navigation2 (Nav2) stack for autonomous path planning  - In Progress
 
 🚀 Build & Run Instructions
-1️⃣ **Build the workspace**
----
+
+1️⃣ Build the Workspace
+
+This project uses two additional packages for 3D mapping and scan merging:
+
+lidarslam_ros2 – for LiDAR-based 3D SLAM and mapping.
+
+scan merger    – for merging multiple LiDAR scans into a single point cloud.
+
+🧩 Steps to Build: 
+
+# Clone the repositories
+git clone https://github.com/rsasaki0109/lidarslam_ros2.git
+git clone https://github.com/LCAS/scans_merger.git
+
+# Build the workspace
 colcon build
+
+# Source the setup file
 source install/setup.bash
+
 
 2️⃣ **Launch simulation**
 
